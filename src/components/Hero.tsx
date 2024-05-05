@@ -16,16 +16,6 @@ const Hero = () => {
 
   return (
     <div className="relative">
-      <div
-        className="absolute z-50 inset-0 bg-grid-slate-100 dark:bg-grid-slate-700/25"
-        style={{
-          WebkitMaskImage:
-            "linear-gradient(0deg, rgba(255,255,255,0.1), rgba(255,255,255,0.5))",
-          maskImage:
-            "linear-gradien(0deg, rgba(255,255,255,0.1), rgba(255,255,255,0.5))",
-          backgroundPosition: "10px 10px",
-        }}
-      />
       <div className="flex sm:flex-row flex-col">
         <div
           onMouseEnter={() => {
@@ -76,13 +66,13 @@ const Hero = () => {
           </div>
         </div>
         {hovering && (
-          <h1 className=" hidden sm:flex text-transparent absolute top-10 z-40 sm:z-none sm:top-[48%] left-[18%] sm:left-[65%] text-white font-semibold sm:font-bold text-[30px] sm:text-[50px]">
+          <h1 className=" hidden sm:flex text-transparent absolute top-10 z-20 sm:z-none sm:top-[48%] left-[18%] sm:left-[65%] text-white font-semibold sm:font-bold text-[30px] sm:text-[50px]">
             Our Works
           </h1>
         )}
 
         <div>
-          <h1 className="text-transparent absolute top-10 z-30 sm:z-none sm:top-[40%] left-[18%] sm:left-[10%] bg-clip-text bg-gradient-to-r from-[#0766FF] to-white  font-semibold sm:font-bold text-[30px] sm:text-[50px]">
+          <h1 className="text-transparent absolute top-10 z-20 sm:z-none sm:top-[40%] left-[18%] sm:left-[10%] bg-clip-text bg-gradient-to-r from-[#0766FF] to-white  font-semibold sm:font-bold text-[30px] sm:text-[50px]">
             You Dream It,
             <br /> We Build It
           </h1>
