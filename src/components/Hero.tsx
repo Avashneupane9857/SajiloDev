@@ -16,6 +16,16 @@ const Hero = () => {
 
   return (
     <div className="relative">
+      {/* <div
+        className="absolute z-50 inset-0 bg-grid-slate-100 dark:bg-grid-slate-700/25"
+        style={{
+          WebkitMaskImage:
+            "linear-gradient(0deg, rgba(255,255,255,0.1), rgba(255,255,255,0.5))",
+          maskImage:f
+            "linear-gradien(0deg, rgba(255,255,255,0.1), rgba(255,255,255,0.5))",
+          backgroundPosition: "10px 10px",
+        }}
+      /> */}
       <div className="flex sm:flex-row flex-col">
         <div
           onMouseEnter={() => {
@@ -77,7 +87,7 @@ const Hero = () => {
             <br /> We Build It
           </h1>
           <button
-            className="rounded-md px-6 py-2 z-30 sm:z-none absolute top-[24%] sm:top-[65%] left-[18%] sm:left-[10%] text-white text-[12px] sm:text-[14px] bg-[#0766FF]"
+            className="rounded-md px-6 py-2 z-20 sm:z-none absolute top-[24%] sm:top-[65%] left-[18%] sm:left-[10%] text-white text-[12px] sm:text-[14px] bg-[#0766FF]"
             onClick={() => navigate("/afterservice/1")}
           >
             Get your own site

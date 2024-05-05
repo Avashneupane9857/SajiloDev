@@ -10,6 +10,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { useRecoilValue } from "recoil";
 import { currUser } from "../store";
+import Popup from "../components/Popup";
 
 const User = () => {
   const [editable, setEditable] = useState(false);
@@ -78,15 +79,16 @@ const User = () => {
               <p className="font-serif">Name</p>
               <input
                 type="text"
-                value={currentUser?.name?.toString()}
+                value={currentUser?.name?.toString() || ""}
                 className="px-2 border border-slate-200 rounded-md shadow-sm shadow-slate-300 mb-2 placeholder:text-[12px] "
                 placeholder="Enter your name"
                 readOnly={!editable}
               />
+
               <p className="font-serif">Email</p>
               <input
                 type="text"
-                value={currentUser?.email?.toString()}
+                value={currentUser?.email?.toString() || ""}
                 className="px-2 border border-slate-200 rounded-md shadow-sm shadow-slate-300 mb-2 placeholder:text-[12px] "
                 placeholder="Enter your email"
                 readOnly={!editable}
@@ -111,12 +113,20 @@ const User = () => {
             </div>
           </div>
           <div className="w-[80%] h-[10%] gap-4 flex flex-col-reverse sm:flex-row items-center justify-center">
-            <button
+            {/* <button
               className="px-14 py-1 text-white bg-[#1F2123] rounded-full text-[18px] font-serif"
               onClick={handleLogOut}
             >
               Logout
-            </button>{" "}
+            </button>{" "} */}
+
+            <Popup
+              deco="px-14 py-1 text-white bg-[#1F2123] rounded-full text-[18px] font-serif"
+              text="Logout"
+              onpressed={handleLogOut}
+            >
+              Logout
+            </Popup>
             <button
               className="px-14 py-1 text-white bg-red-500 rounded-full text-[14px] sm:text-[18px] font-serif"
               onClick={handleChangePassword}
