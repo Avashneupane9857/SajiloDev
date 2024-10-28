@@ -1,0 +1,89 @@
+import { founders } from "../constants";
+import { styles } from "../styles";
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa6";
+import { motion } from "framer-motion";
+import { slideIn, textVariant } from "../utils/motion";
+import { SectionWrapper } from "../hoc";
+
+const Founders = () => {
+  return (
+    <div
+      className={`${styles.padding} w-full h-[380px] sm:h-[500px] flex flex-col items-center gap-3`}
+    >
+      <motion.div
+        variants={textVariant(0.2)}
+        className="h-[10%] flex items-center gap-2"
+      >
+        <p className="font-serif text-[18px] sm:text-[22px] italic ">Sajilo</p>
+        <div className="font-serif  text-[18px] sm:text-[22px] italic bg-[#0766FF] flex items-center justify-center p-1 sm:p-2 rounded-[50%] text-white">
+          Dev's
+        </div>
+        <p className="font-serif  text-[18px] sm:text-[22px] italic ">
+          Founders
+        </p>
+      </motion.div>
+      <div className="w-full h-[90%] flex items-center justify-around">
+        {founders?.map((founder, index) => (
+          <motion.div
+            variants={slideIn(
+              index === 0 ? "left" : "right",
+              "spring",
+              0.5,
+              0.9
+            )}
+            key={index}
+            className="w-[45%] sm:w-[30%] h-[90%] shadow-xl rounded-md shadow-slate-300 flex flex-col items-center justify-around"
+          >
+            <div className="w-[30%] h-[25%] sm:h-[35%] overflow-hidden rounded-[50%]">
+              <img
+                src={founder?.img}
+                alt="founder image"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <p
+              dangerouslySetInnerHTML={{ __html: founder?.vanai }}
+              className="font-serif text-[13px] h-[55%] sm:h-[60%] flex items-center sm:text-[16px] px-3 text-center overflow-y-scroll sm:overflow-auto"
+            ></p>
+            <div className="w-[90%] flex justify-around items-center h-[13%] sm:h-[20%]">
+              <FaGithub
+                onClick={() =>
+                  window.open(
+                    founder?.github,
+                    "_blank",
+                    "rel=noopener noreferrer"
+                  )
+                }
+                className="text-xl sm:text-3xl cursor-pointer "
+              />
+
+              <FaLinkedin
+                onClick={() =>
+                  window.open(
+                    founder?.linkedin,
+                    "_blank",
+                    "rel=noopener noreferrer"
+                  )
+                }
+                className="text-xl sm:text-3xl cursor-pointer text-blue-800"
+              />
+
+              <FaInstagram
+                onClick={() =>
+                  window.open(
+                    founder?.instagram,
+                    "_blank",
+                    "rel=noopener noreferrer"
+                  )
+                }
+                className="text-xl sm:text-3xl cursor-pointer text-red-600"
+              />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default SectionWrapper(Founders);
