@@ -4,9 +4,10 @@ import { navLinks, serviceDropdowns } from "../constants";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { currUser, isLoggedIn } from "../store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from "react-icons/ai";
 import { ImCross } from "react-icons/im";
+
 const Navbar = ({
   bgColor,
   textColor,
@@ -22,13 +23,25 @@ const Navbar = ({
   const isLogIn = useRecoilValue(isLoggedIn);
   const [showDropdown, setShowDropdown] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const currentUser = useRecoilValue(currUser);
   let timeoutId: NodeJS.Timeout;
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 20;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleMouseLeave = () => {
     timeoutId = setTimeout(() => {
       setShowDropdown(false);
-    }, 1000);
+    }, 300);
   };
 
   const handleMouseOverDropdown = () => {
@@ -40,26 +53,33 @@ const Navbar = ({
 
   return (
     <>
+      {/* Desktop Navigation */}
       <div
-        className={` ${bgColor} bg-opacity-70 backdrop-blur-sm hover:backdrop-blur-lg	border-radius:0.5rem  	 fixed w-full h-[60px] hidden sm:flex items-center ${textColor} justify-between z-30`}
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          scrolled 
+            ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' 
+            : 'bg-transparent'
+        }`}
       >
-        <div className="flex items-center gap-10 w-[65%]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          {/* Logo */}
           <div
-            className="w-[20%] cursor-pointer
-        "
+            className="flex items-center cursor-pointer"
             onClick={() => navigate("/")}
           >
             <img
               src={logo}
-              alt="logo"
-              className="w-full h-full object-contain"
+              alt="SajiloDev"
+              className="h-8 w-auto object-contain"
             />
           </div>
-          <div className="flex items-center  gap-10 w-[50%]">
+
+          {/* Desktop Menu */}
+          <div className="hidden lg:flex items-center space-x-8">
             {navLinks?.map((nav, index) => (
               <div
                 key={index}
-                className={`${textColor} flex items-center text-[14px] gap-2 cursor-pointer relative`}
+                className="relative group"
                 onMouseEnter={() => {
                   if (nav.title === "Services") {
                     setShowDropdown(true);
@@ -70,168 +90,186 @@ const Navbar = ({
                     handleMouseLeave();
                   }
                 }}
-                onClick={() => {
-                  navigate(nav.link);
-                }}
               >
-                {nav.title === "Services" ? (
-                  <>
-                    {nav.title}
-                    <IoMdArrowDropdown className={`inline ${textColor} `} />
-                  </>
-                ) : (
-                  <a className="hover:text-slate-400" href={nav?.link}>
-                    {nav?.title}
-                  </a>
+                <button
+                  className={`flex items-center space-x-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                    scrolled 
+                      ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50' 
+                      : 'text-white hover:text-blue-200'
+                  }`}
+                  onClick={() => {
+                    if (nav.title !== "Services") {
+                      navigate(nav.link);
+                    }
+                  }}
+                >
+                  <span>{nav.title}</span>
+                  {nav.title === "Services" && (
+                    <IoMdArrowDropdown className="text-sm" />
+                  )}
+                </button>
+
+                {/* Services Dropdown */}
+                {nav.title === "Services" && showDropdown && (
+                  <div
+                    className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50"
+                    onMouseLeave={() => setShowDropdown(false)}
+                    onMouseOver={() => handleMouseOverDropdown()}
+                  >
+                    {serviceDropdowns?.map((service, index) => (
+                      <button
+                        key={index}
+                        className="w-full text-left px-4 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 text-sm font-medium text-gray-700"
+                        onClick={() => {
+                          navigate(`/afterservice/${index + 1}`);
+                          setShowDropdown(false);
+                        }}
+                      >
+                        {service?.title}
+                      </button>
+                    ))}
+                  </div>
                 )}
               </div>
             ))}
           </div>
-        </div>
-        {!isLogIn && (
-          <div className="w-[18%] gap-3 flex items-center justify-around pr-2">
-            <p
-              className="text-[#0766FF] hover:text-[#799fdc] cursor-pointer"
-              onClick={() => navigate("/signin")}
-            >
-              Log in
-            </p>
-            <p
-              className={`px-4 py-1 bg-white cursor-pointer text-[#0766FF] hover:bg-slate-200    rounded-lg ${borderColor}`}
-              onClick={() => navigate("/signup")}
-            >
-              Register
-            </p>
-          </div>
-        )}
-        {isLogIn && (
-          <div
-            className="w-[3%] h-[80%] flex items-center rounded-full justify-center mr-4"
-            onClick={() => navigate("/user")}
-          >
-            <img
-              src={currentUser?.photo || def}
-              className="w-full h-full object-cover rounded-full cursor-pointer"
-            />
-          </div>
-        )}
 
-        {showDropdown && (
-          <div
-            className="dropdown-menu top-14 p-3 rounded-b-xl rounded-r-xl left-[15%] text-black bg-white w-[16%] absolute z-50 "
-            onMouseLeave={() => setShowDropdown(false)}
-            onMouseOver={() => handleMouseOverDropdown()}
+          {/* Desktop Auth Buttons */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {!isLogIn ? (
+              <>
+                <button
+                  className={`font-medium transition-all duration-300 ${
+                    scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+                  }`}
+                  onClick={() => navigate("/signin")}
+                >
+                  Sign In
+                </button>
+                <button
+                  className={`btn btn-primary ${
+                    scrolled ? 'bg-blue-600 hover:bg-blue-700' : 'bg-white text-blue-600 hover:bg-gray-100'
+                  }`}
+                  onClick={() => navigate("/signup")}
+                >
+                  Get Started
+                </button>
+              </>
+            ) : (
+              <div className="flex items-center space-x-4">
+                <button
+                  className={`font-medium transition-all duration-300 ${
+                    scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+                  }`}
+                  onClick={() => navigate("/orders")}
+                >
+                  Orders
+                </button>
+                <div
+                  className="w-10 h-10 rounded-full overflow-hidden cursor-pointer border-2 border-white shadow-lg hover:shadow-xl transition-all duration-300"
+                  onClick={() => navigate("/user")}
+                >
+                  <img
+                    src={currentUser?.photo || def}
+                    className="w-full h-full object-cover"
+                    alt="Profile"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden p-2 rounded-lg transition-all duration-300"
+            onClick={() => setToggle(!toggle)}
           >
-            <ul className="w-full">
-              {serviceDropdowns?.map((service, index) => {
-                return (
-                  <li
+            {toggle ? (
+              <AiOutlineMenuUnfold className={`text-2xl ${scrolled ? 'text-gray-700' : 'text-white'}`} />
+            ) : (
+              <AiOutlineMenuFold className={`text-2xl ${scrolled ? 'text-gray-700' : 'text-white'}`} />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {toggle && (
+          <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-200 z-50">
+            <div className="px-6 py-4 space-y-4">
+              {/* Mobile Navigation Links */}
+              <div className="space-y-2">
+                {navLinks.map((link, index) => (
+                  <button
                     key={index}
-                    className="hover:bg-[#0766FF30] text-[#0B619E] px-2 py-1 rounded-sm text-[12px] cursor-pointer "
+                    className="w-full text-left py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300"
+                    onClick={() => {
+                      if (link.title === "Services") {
+                        // Handle services dropdown in mobile
+                        navigate("/afterservice/0");
+                      } else {
+                        navigate(link.link);
+                      }
+                      setToggle(false);
+                    }}
                   >
-                    <p onClick={() => navigate(`/afterservice/${index + 1}`)}>
-                      {service?.title}
-                    </p>
-                  </li>
-                );
-              })}
-            </ul>
+                    {link.title}
+                  </button>
+                ))}
+              </div>
+
+              {/* Mobile Auth Section */}
+              <div className="pt-4 border-t border-gray-200">
+                {!isLogIn ? (
+                  <div className="space-y-3">
+                    <button
+                      className="w-full py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition-all duration-300"
+                      onClick={() => {
+                        navigate("/signin");
+                        setToggle(false);
+                      }}
+                    >
+                      Sign In
+                    </button>
+                    <button
+                      className="w-full btn btn-primary"
+                      onClick={() => {
+                        navigate("/signup");
+                        setToggle(false);
+                      }}
+                    >
+                      Get Started
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between">
+                    <button
+                      className="py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition-all duration-300"
+                      onClick={() => {
+                        navigate("/orders");
+                        setToggle(false);
+                      }}
+                    >
+                      Orders
+                    </button>
+                    <div
+                      className="w-10 h-10 rounded-full overflow-hidden cursor-pointer border-2 border-gray-200"
+                      onClick={() => {
+                        navigate("/user");
+                        setToggle(false);
+                      }}
+                    >
+                      <img
+                        src={currentUser?.photo || def}
+                        className="w-full h-full object-cover"
+                        alt="Profile"
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         )}
-      </div>
-      {/* Mobile menu */}
-      <div
-        className={`shadow-2xl shadow-slate-500 sm:hidden cursor-pointer z-40 flex items-center h-[70px] px-6 w-full mr-3 justify-between ${bgColor}`}
-      >
-        <div className="w-[30%] cursor-pointer" onClick={() => navigate("/")}>
-          <img src={logo} alt="logo" className="w-full h-full object-contain" />
-        </div>
-        {toggle ? (
-          <AiOutlineMenuUnfold
-            className={`text-2xl ${
-              bgColor == "bg-white" ? "text-black" : "text-white"
-            }`}
-            onClick={() => setToggle(!toggle)}
-          />
-        ) : (
-          <AiOutlineMenuFold
-            className={`text-2xl ${
-              bgColor == "bg-white" ? "text-black" : "text-white"
-            }`}
-            onClick={() => setToggle(!toggle)}
-          />
-        )}
-        <ul
-          className={`${
-            !toggle ? "hidden" : "flex"
-          } p-6 bg-[#ffffff] absolute top-14 right-3   min-w-[140px] z-50 rounded-xl rounded-tr-none flex flex-col items-end gap-4`}
-        >
-          <ImCross className="text-sm" onClick={() => setToggle(false)} />
-          <li
-            className={`font-poppins text-[17px] w-full   font-medium cursor-pointer hover:bg-[#D9D9D9] hover:p-1 hover:text-[15px] hover:rounded-md`}
-            onClick={() => {
-              setToggle(!toggle);
-            }}
-          >
-            <a href="/" className="w-full text-left">
-              Home
-            </a>
-          </li>
-          {navLinks.map((link, index) => (
-            <li
-              key={index}
-              className={`font-poppins w-full text-[17px]   font-medium cursor-pointer hover:bg-[#D9D9D9] hover:p-1 hover:text-[15px] hover:rounded-md`}
-              onClick={() => {
-                setToggle(!toggle);
-              }}
-            >
-              {link.title === "Services" ? (
-                <a className="w-full text-left" href="/afterservice/0">
-                  Services
-                </a>
-              ) : (
-                <a className="w-full text-left" href={link?.link}>
-                  {link.title}
-                </a>
-              )}
-            </li>
-          ))}
-          {isLogIn ? (
-            <li
-              className={`font-poppins text-[17px] w-full   font-medium cursor-pointer hover:bg-[#D9D9D9] hover:p-1 hover:text-[15px] hover:rounded-md`}
-              onClick={() => {
-                setToggle(!toggle);
-              }}
-            >
-              <a href="/user" className="w-full text-left">
-                Profile
-              </a>
-            </li>
-          ) : (
-            <>
-              <li
-                className={`font-poppins text-[17px] w-full   font-medium cursor-pointer hover:bg-[#D9D9D9] hover:p-1 hover:text-[15px] hover:rounded-md`}
-                onClick={() => {
-                  setToggle(!toggle);
-                }}
-              >
-                <a href="/signin" className="w-full text-left">
-                  Login
-                </a>
-              </li>
-              <li
-                className={`font-poppins text-[17px] w-full   font-medium cursor-pointer hover:bg-[#D9D9D9] hover:p-1 hover:text-[15px] hover:rounded-md`}
-                onClick={() => {
-                  setToggle(!toggle);
-                }}
-              >
-                <a href="/signup" className="w-full text-left">
-                  Register
-                </a>
-              </li>
-            </>
-          )}
-        </ul>
       </div>
     </>
   );

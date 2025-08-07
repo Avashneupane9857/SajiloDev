@@ -16,8 +16,8 @@ const HomePage = () => {
     <>
       <Navbar
         logo={logo}
-        bgColor="bg-black"
-        textColor="text-white"
+        bgColor=""
+        textColor=""
         borderColor=""
       />
       <Hero />

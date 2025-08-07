@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { logo } from "../assets";
-import { styles } from "../styles";
-import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { currUser, isLoggedIn, loginErr } from "../store";
 import { addDoc, collection } from "firebase/firestore";
@@ -29,7 +28,6 @@ const Footer = () => {
           time: new Date().toLocaleString(),
         });
         setCurrentUser({ ...currentUser, subscribed: true });
-
         console.log("subscribed");
       } catch (error) {
         console.error("Error adding document: ", error);
@@ -41,113 +39,137 @@ const Footer = () => {
   return (
     <motion.div
       variants={fadeIn("up", "spring", 0.5, 0.5)}
-      className={`${styles.paddingX} flex flex-col bg-[#1F2123] w-full ${
-        currentUser?.subscribed ? "h-[260px]" : "h-[550px]"
-      } sm:h-[300px] items-center`}
+      className="bg-gray-900 text-white"
     >
-      <div
-        className={` w-full h-full sm:h-[82%] flex  flex-col-reverse sm:flex-row justify-around items-center`}
-      >
-        <div className="w-[60%] sm:w-[20%] h-[30%] sm:h-[50%] flex flex-col items-center justify-around">
-          <div className=" w-[60%] h-[40%]">
-            <img
-              onClick={() => navigate("/")}
-              src={logo}
-              alt="logo"
-              className="cursor-pointer w-full h-full object-contain"
-            />
-          </div>
-
-          <div className="w-full h-[55%] flex items-center justify-between">
-            <FaLinkedin
-              onClick={() =>
-                window.open(
-                  "https://www.linkedin.com/company/sajilo-dev/",
-                  "_blank",
-                  "rel=noopener noreferrer"
-                )
-              }
-              className="cursor-pointer text-3xl text-blue-400"
-            />
-            <FaInstagram
-              onClick={() =>
-                window.open(
-                  "https://www.instagram.com/sajilodev/",
-                  "_blank",
-                  "rel=noopener noreferrer"
-                )
-              }
-              className="cursor-pointer text-3xl text-pink-600"
-            />
-            <FaFacebook
-              onClick={() =>
-                window.open(
-                  "https://www.facebook.com/profile.php?id=61558938183182",
-                  "_blank",
-                  "rel=noopener noreferrer"
-                )
-              }
-              className="cursor-pointer text-3xl text-blue-600"
-            />
-          </div>
-        </div>
-
-        <div className="w-[95%] sm:w-[40%] h-[10%] sm:h-auto flex justify-around">
-          <a
-            href="/contactus"
-            className="text-white text-[14px] sm:text-[18px] underline font-serif"
-          >
-            Contact us
-          </a>
-          <a
-            href="/contactus"
-            className="text-white  text-[14px] sm:text-[18px] underline font-serif"
-          >
-            Jobs
-          </a>
-          <a
-            href="/contactus"
-            className="text-white  text-[14px] sm:text-[18px] underline font-serif"
-          >
-            Customer support
-          </a>
-        </div>
-
-        {!currentUser?.subscribed && (
-          <div className="flex flex-col w-[75%] sm:w-[30%] h-[60%] sm:h-[70%] justify-center items-center pt-4">
-            <div className="flex flex-row w-[90%] sm:w-[25%] items-center justify-center mt-2">
-              <div className="w-[8%] h-[2px] border-b-4 border-[#0766FF] mr-2 rounded-3xl flex-grow" />
-              <p className="font-extrabold  text-xl text-white sm:text-2xl">
-                SUBSCRIPTION
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid md:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <div className="md:col-span-2">
+            <div className="mb-6">
+              <img
+                onClick={() => navigate("/")}
+                src={logo}
+                alt="SajiloDev"
+                className="h-8 w-auto object-contain cursor-pointer mb-4"
+              />
+              <p className="text-gray-400 leading-relaxed max-w-md">
+                We are a professional web development agency dedicated to creating stunning, 
+                functional websites that help businesses grow and succeed in the digital world.
               </p>
-              <div className="w-[8%] h-[2px] border-b-4 ml-2 border-[#0766FF] rounded-3xl flex-grow" />
             </div>
-            <p className="font-extrabold my-2 text-[17px] text-white">
-              Join our Newsletter
-            </p>
-            <p className=" text-center font-bold text-[12px] text-white md:leading-loose m-2">
-              Subscribe to our Newsletter to get the latest news, updates
-              delivered directly to your inbox.
-            </p>
 
-            <div className="w-[90%] sm:w-auto my-2 mb-6 justify-center items-center flex flex-row">
+            {/* Social Links */}
+            <div className="flex space-x-4">
+              <a
+                href="https://www.linkedin.com/company/sajilo-dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors duration-300"
+              >
+                <FaLinkedin className="text-lg" />
+              </a>
+              <a
+                href="https://www.instagram.com/sajilodev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition-all duration-300"
+              >
+                <FaInstagram className="text-lg" />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61558938183182"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors duration-300"
+              >
+                <FaFacebook className="text-lg" />
+              </a>
+              <a
+                href="https://github.com/sajilodev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-600 transition-colors duration-300"
+              >
+                <FaGithub className="text-lg" />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href="/contactus"
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                >
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/afterservice/0"
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                >
+                  Services
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/orders"
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                >
+                  Orders
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/contactus"
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
+                >
+                  Customer Support
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Newsletter */}
+          {!currentUser?.subscribed && (
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Stay Updated</h3>
+              <p className="text-gray-400 mb-4">
+                Subscribe to our newsletter for the latest updates and insights.
+              </p>
               <button
                 onClick={handleSubscribe}
-                className="bg-[#0766FF] text-[12px] sm:text-[16px] font-medium sm:font-bold text-white hover:shadow-2xl mt-2 hover:bg-blue-500 ml-1 sm:ml-3 p-1 sm:p-2 px-4 rounded-2xl"
+                className="btn btn-primary w-full"
               >
-                Subscribe
+                Subscribe Now
               </button>
             </div>
+          )}
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-800 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">
+              © 2024 SajiloDev. All rights reserved.
+            </p>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+              <a href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors duration-300">
+                Privacy Policy
+              </a>
+              <a href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors duration-300">
+                Terms of Service
+              </a>
+            </div>
           </div>
-        )}
-      </div>
-      <div className="w-[80%] sm:w-[20%] h-[10%] sm:h-auto border-t border-slate-400 flex items-center justify-center p-2">
-        {" "}
-        <p className="font-serif text-[18px] sm:text-[22px] text-slate-400">
-          Copyright@SajiloDev
-        </p>
+        </div>
       </div>
     </motion.div>
   );
 };
+
 export default SectionWrapper(Footer);
