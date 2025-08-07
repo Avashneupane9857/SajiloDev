@@ -45,37 +45,120 @@ const Domain = () => {
   return (
     <motion.div
       variants={slideIn("left", "spring", 0.6, 1.6)}
-      className="w-full h-[300px] flex flex-col items-center justify-center bg-[#1F2123]"
+      className="w-full py-20 bg-gradient-to-r from-black to-gray-900"
     >
-      <p className="font-bold text-white text-[18px] sm:text-[28px]">
-        Secure your domain now
-      </p>
-      <p className="font-extralight text-center tracking-widest leading-loose text-slate-300 w-[80%] sm:w-[50%] my-4 text-[10px] sm:text-[12px]">
-        Unlock your digital potential with our domain registration service. Your
-        domain is your unique online identity, your digital storefront in the
-        vast landscape of the internet.
-      </p>
-      <div className="w-[90%] sm:w-[70%] h-[50px] sm:h-[80px] rounded-lg flex justify-around items-center bg-slate-300">
-        <input
-          type="text"
-          placeholder="my-website.com"
-          className="px-12 h-[30%] sm:h-[50%] w-[70%] sm:w-[80%] rounded-lg py-3 bg-slate-300 placeholder:text-[17px] sm:placeholder:text-[22px] placeholder:font-extralight"
-          value={domainName}
-          onChange={(e) => setDomainName(e.target.value)}
-        />
-        <button
-          className="h-[50%] w-[30%] sm:w-auto text-[10px] sm:text-[16px] my-auto mx-1 px-2 text-white bg-[#0766FF] rounded-lg"
-          onClick={handleFindDomain}
-          disabled={loading}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="space-y-6"
         >
-          {loading ? "Checking..." : "Find domain"}
-        </button>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            Secure Your Domain Now
+          </h2>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            Unlock your digital potential with our domain registration service. Your
+            domain is your unique online identity, your digital storefront in the
+            vast landscape of the internet.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="mt-8"
+        >
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white rounded-2xl p-2 shadow-xl border border-gray-200">
+              <div className="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="text"
+                  placeholder="my-website.com"
+                  className="flex-1 px-6 py-4 text-lg bg-transparent border-none outline-none text-black placeholder-gray-500"
+                  value={domainName}
+                  onChange={(e) => setDomainName(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleFindDomain()}
+                />
+                <button
+                  className="px-8 py-4 bg-black text-white rounded-xl font-semibold hover:bg-gray-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={handleFindDomain}
+                  disabled={loading || !domainName}
+                >
+                  {loading ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Checking...
+                    </div>
+                  ) : (
+                    "Find Domain"
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {availability !== null && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className={`mt-4 p-4 rounded-xl ${
+                  availability 
+                    ? 'bg-green-50 border border-green-200 text-green-800' 
+                    : 'bg-red-50 border border-red-200 text-red-800'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <div className={`w-2 h-2 rounded-full ${
+                    availability ? 'bg-green-500' : 'bg-red-500'
+                  }`}></div>
+                  <span className="font-semibold">
+                    {availability ? "Domain available!" : "Domain not available."}
+                  </span>
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
+
+        {/* Additional Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-12 grid md:grid-cols-3 gap-6 text-white"
+        >
+          <div className="text-center">
+            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 className="font-semibold mb-1">Instant Check</h3>
+            <p className="text-sm text-gray-300">Real-time domain availability</p>
+          </div>
+          
+          <div className="text-center">
+            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <h3 className="font-semibold mb-1">Secure Registration</h3>
+            <p className="text-sm text-gray-300">Safe and reliable domain services</p>
+          </div>
+          
+          <div className="text-center">
+            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 className="font-semibold mb-1">Fast Setup</h3>
+            <p className="text-sm text-gray-300">Quick domain configuration</p>
+          </div>
+        </motion.div>
       </div>
-      {availability !== null && (
-        <p className="text-white mt-2">
-          {availability ? "Domain available!" : "Domain not available."}
-        </p>
-      )}
     </motion.div>
   );
 };

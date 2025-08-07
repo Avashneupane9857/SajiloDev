@@ -5,6 +5,7 @@ import { currUser, isLoggedIn, loginErr } from "../store";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import { motion } from "framer-motion";
 
 interface LeaveReviewProps {
   onClose: () => void;
@@ -67,55 +68,102 @@ const LeaveReview: React.FC<LeaveReviewProps> = ({
   };
 
   return (
-    <div className="fixed inset-0  bg-black bg-opacity-50 flex justify-center items-center  ">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-[80%] sm:w-full">
-        <h2 className="text-xl font-bold mb-4">Leave a Review</h2>
-        <div className="flex gap-3 flex-col">
-          <p>Rate sajiloDev</p>
-          <div className="flex gap-3">
-            {arr.map((_, i) =>
-              i < currentRate ? (
-                <FaStar
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4"
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+        className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8"
+      >
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Share Your Experience</h2>
+          <p className="text-gray-600">Help others by leaving a review about your experience with SajiloDev</p>
+        </div>
+
+        <div className="space-y-6">
+          {/* Rating Section */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-3">
+              Rate your experience
+            </label>
+            <div className="flex gap-2 justify-center">
+              {arr.map((_, i) => (
+                <button
                   key={i}
-                  className="text-yellow-400 cursor-pointer"
                   onClick={() => setCurrentRate(i + 1)}
-                />
-              ) : (
-                <FaRegStar
-                  key={i}
-                  className=" cursor-pointer"
-                  onClick={() => setCurrentRate(i + 1)}
-                />
-              )
+                  className="p-2 hover:scale-110 transition-transform duration-200"
+                >
+                  {i < currentRate ? (
+                    <FaStar className="text-3xl text-yellow-400" />
+                  ) : (
+                    <FaRegStar className="text-3xl text-gray-300 hover:text-yellow-400" />
+                  )}
+                </button>
+              ))}
+            </div>
+            {currentRate > 0 && (
+              <p className="text-center text-sm text-gray-500 mt-2">
+                {currentRate === 1 && "Poor"}
+                {currentRate === 2 && "Fair"}
+                {currentRate === 3 && "Good"}
+                {currentRate === 4 && "Very Good"}
+                {currentRate === 5 && "Excellent"}
+              </p>
             )}
           </div>
 
-          <textarea
-            className="form-textarea p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-            rows={4}
-            onChange={(e) =>
-              setFormData({ ...formData, review: e.target.value })
-            }
-            placeholder="Write your review here..."
-          ></textarea>
-          <div className="flex gap-3 justify-end mt-4">
+          {/* Review Text */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-3">
+              Your Review
+            </label>
+            <textarea
+              className="input resize-none"
+              rows={4}
+              value={formData.review}
+              onChange={(e) =>
+                setFormData({ ...formData, review: e.target.value })
+              }
+              placeholder="Tell us about your experience with our services..."
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              {formData.review.length}/500 characters
+            </p>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-4 pt-4">
             <button
               type="button"
-              className="hover:bg-gray-200 bg-white text-gray-900 font-bold py-2 px-4 rounded-l"
+              className="btn btn-secondary flex-1"
               onClick={onClose}
             >
               Cancel
             </button>
             <button
               onClick={handleSubmit}
-              className="bg-[#0766FF] hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-r"
+              disabled={currentRate === 0 || formData.review.trim() === "" || loading}
+              className="btn btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Submitting..." : "Submit"}
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Submitting...
+                </div>
+              ) : (
+                "Submit Review"
+              )}
             </button>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

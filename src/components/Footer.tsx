@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { logo } from "../assets";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { currUser, isLoggedIn, loginErr } from "../store";
@@ -39,19 +38,22 @@ const Footer = () => {
   return (
     <motion.div
       variants={fadeIn("up", "spring", 0.5, 0.5)}
-      className="bg-gray-900 text-white"
+      className="bg-black text-white"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="md:col-span-2">
             <div className="mb-6">
-              <img
-                onClick={() => navigate("/")}
-                src={logo}
-                alt="SajiloDev"
-                className="h-8 w-auto object-contain cursor-pointer mb-4"
-              />
+              <div className="flex items-center space-x-3 mb-4 cursor-pointer" onClick={() => navigate("/")}>
+                <div className="w-10 h-10 bg-gradient-to-br from-white to-gray-300 rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-black font-bold text-xl">S</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-bold text-2xl text-white">Sajilo</span>
+                  <span className="font-semibold text-sm text-gray-300">Dev</span>
+                </div>
+              </div>
               <p className="text-gray-400 leading-relaxed max-w-md">
                 We are a professional web development agency dedicated to creating stunning, 
                 functional websites that help businesses grow and succeed in the digital world.
@@ -64,7 +66,7 @@ const Footer = () => {
                 href="https://www.linkedin.com/company/sajilo-dev/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors duration-300"
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors duration-300"
               >
                 <FaLinkedin className="text-lg" />
               </a>
@@ -72,7 +74,7 @@ const Footer = () => {
                 href="https://www.instagram.com/sajilodev/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition-all duration-300"
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300"
               >
                 <FaInstagram className="text-lg" />
               </a>
@@ -80,7 +82,7 @@ const Footer = () => {
                 href="https://www.facebook.com/profile.php?id=61558938183182"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors duration-300"
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors duration-300"
               >
                 <FaFacebook className="text-lg" />
               </a>
@@ -88,7 +90,7 @@ const Footer = () => {
                 href="https://github.com/sajilodev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center hover:bg-gray-600 transition-colors duration-300"
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors duration-300"
               >
                 <FaGithub className="text-lg" />
               </a>
@@ -97,7 +99,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white">Quick Links</h3>
             <ul className="space-y-3">
               <li>
                 <a
@@ -137,13 +139,13 @@ const Footer = () => {
           {/* Newsletter */}
           {!currentUser?.subscribed && (
             <div>
-              <h3 className="text-lg font-semibold mb-4">Stay Updated</h3>
+              <h3 className="text-lg font-semibold mb-4 text-white">Stay Updated</h3>
               <p className="text-gray-400 mb-4">
                 Subscribe to our newsletter for the latest updates and insights.
               </p>
               <button
                 onClick={handleSubscribe}
-                className="btn btn-primary w-full"
+                className="btn bg-white text-black hover:bg-gray-100 w-full"
               >
                 Subscribe Now
               </button>

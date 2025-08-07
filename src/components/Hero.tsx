@@ -17,11 +17,11 @@ const Hero = () => {
   const [hovering, setHovering] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-30">
+      <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           backgroundSize: '60px 60px'
         }}></div>
       </div>
@@ -39,9 +39,9 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 text-sm font-medium"
+              className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium"
             >
-              <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+              <span className="w-2 h-2 bg-white rounded-full mr-2"></span>
               Professional Web Development Agency
             </motion.div>
 
@@ -54,7 +54,7 @@ const Hero = () => {
             >
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
                 <span className="block">You Dream It,</span>
-                <span className="block gradient-text">
+                <span className="block bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                   We Build It.
                 </span>
               </h1>
@@ -73,13 +73,13 @@ const Hero = () => {
               className="flex flex-col sm:flex-row gap-4"
             >
               <button
-                className="btn btn-primary text-lg px-8 py-4"
+                className="btn btn-primary text-lg px-8 py-4 bg-white text-black hover:bg-gray-100"
                 onClick={() => navigate("/afterservice/1")}
               >
                 Start Your Project
               </button>
               <button
-                className="btn btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-gray-900"
+                className="btn btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-black"
                 onClick={() => navigate("/contactus")}
               >
                 Get Free Quote
@@ -131,13 +131,13 @@ const Hero = () => {
                       window.open(work?.link, "_blank", "rel=noopener noreferrer")
                     }
                   >
-                    <div className="relative overflow-hidden rounded-2xl shadow-2xl w-full h-48">
+                    <div className="relative overflow-hidden rounded-2xl shadow-2xl w-full h-48 border border-white/10">
                       <img
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         src={work?.img}
                         alt={work?.title}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div className="absolute bottom-4 left-4 text-white">
                           <h3 className="font-semibold text-sm">{work?.title}</h3>
                           <p className="text-xs text-gray-300">View Project</p>
@@ -159,7 +159,7 @@ const Hero = () => {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-20 blur-xl pointer-events-none"
+                className="absolute -top-4 -right-4 w-20 h-20 bg-white/20 rounded-full blur-xl"
               />
               <motion.div
                 animate={{ 
@@ -171,16 +171,16 @@ const Hero = () => {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20 blur-xl pointer-events-none"
+                className="absolute -bottom-4 -left-4 w-16 h-16 bg-gray-400/20 rounded-full blur-xl"
               />
             </div>
 
-            {/* Hover Text - Only show when not hovering over cards */}
+            {/* Hover Text */}
             {hovering && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                className="absolute inset-0 flex items-center justify-center"
               >
                 <div className="glass rounded-2xl px-6 py-4 text-white text-center">
                   <h3 className="text-xl font-bold mb-2">Our Portfolio</h3>

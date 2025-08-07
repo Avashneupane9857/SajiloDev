@@ -1,4 +1,3 @@
-import { styles } from "../styles";
 import Loading from "./Loading";
 import { workItems } from "../constants";
 import { motion } from "framer-motion";
@@ -14,8 +13,8 @@ const Works = () => {
           variants={textVariant(0.2)}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our <span className="gradient-text">Portfolio</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
+            Our <span className="bg-gradient-to-r from-black to-gray-600 bg-clip-text text-transparent">Portfolio</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Explore our latest projects and see how we've helped businesses achieve their digital goals.
@@ -73,7 +72,7 @@ const Works = () => {
 
                     {/* Project Info */}
                     <div className="p-6">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                      <h3 className="text-lg font-semibold text-black mb-2 group-hover:text-gray-600 transition-colors duration-300">
                         {item?.title}
                       </h3>
                       <p className="text-gray-600 text-sm">
@@ -95,7 +94,7 @@ const Works = () => {
           className="text-center mt-16"
         >
           <div className="bg-gray-50 rounded-3xl p-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+            <h3 className="text-3xl font-bold text-black mb-4">
               Want to See More?
             </h3>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">

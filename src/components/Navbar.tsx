@@ -67,11 +67,19 @@ const Navbar = ({
             className="flex items-center cursor-pointer"
             onClick={() => navigate("/")}
           >
-            <img
-              src={logo}
-              alt="SajiloDev"
-              className="h-8 w-auto object-contain"
-            />
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-black to-gray-800 rounded-xl flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-xl">S</span>
+              </div>
+              <div className="flex flex-col">
+                <span className={`font-bold text-2xl ${scrolled ? 'text-black' : 'text-white'}`}>
+                  Sajilo
+                </span>
+                <span className={`font-semibold text-sm ${scrolled ? 'text-gray-600' : 'text-gray-300'}`}>
+                  Dev
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* Desktop Menu */}
@@ -94,8 +102,8 @@ const Navbar = ({
                 <button
                   className={`flex items-center space-x-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                     scrolled 
-                      ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50' 
-                      : 'text-white hover:text-blue-200'
+                      ? 'text-gray-700 hover:text-black hover:bg-gray-100' 
+                      : 'text-white hover:text-gray-200'
                   }`}
                   onClick={() => {
                     if (nav.title !== "Services") {
@@ -119,7 +127,7 @@ const Navbar = ({
                     {serviceDropdowns?.map((service, index) => (
                       <button
                         key={index}
-                        className="w-full text-left px-4 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 text-sm font-medium text-gray-700"
+                        className="w-full text-left px-4 py-3 hover:bg-gray-100 hover:text-black transition-colors duration-200 text-sm font-medium text-gray-700"
                         onClick={() => {
                           navigate(`/afterservice/${index + 1}`);
                           setShowDropdown(false);
@@ -140,15 +148,15 @@ const Navbar = ({
               <>
                 <button
                   className={`font-medium transition-all duration-300 ${
-                    scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+                    scrolled ? 'text-gray-700 hover:text-black' : 'text-white hover:text-gray-200'
                   }`}
                   onClick={() => navigate("/signin")}
                 >
                   Sign In
                 </button>
                 <button
-                  className={`btn btn-primary ${
-                    scrolled ? 'bg-blue-600 hover:bg-blue-700' : 'bg-white text-blue-600 hover:bg-gray-100'
+                  className={`btn ${
+                    scrolled ? 'bg-black text-white hover:bg-gray-800' : 'bg-white text-black hover:bg-gray-100'
                   }`}
                   onClick={() => navigate("/signup")}
                 >
@@ -159,7 +167,7 @@ const Navbar = ({
               <div className="flex items-center space-x-4">
                 <button
                   className={`font-medium transition-all duration-300 ${
-                    scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+                    scrolled ? 'text-gray-700 hover:text-black' : 'text-white hover:text-gray-200'
                   }`}
                   onClick={() => navigate("/orders")}
                 >
@@ -201,7 +209,7 @@ const Navbar = ({
                 {navLinks.map((link, index) => (
                   <button
                     key={index}
-                    className="w-full text-left py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300"
+                    className="w-full text-left py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-gray-100 hover:text-black transition-all duration-300"
                     onClick={() => {
                       if (link.title === "Services") {
                         // Handle services dropdown in mobile
@@ -231,7 +239,7 @@ const Navbar = ({
                       Sign In
                     </button>
                     <button
-                      className="w-full btn btn-primary"
+                      className="w-full btn bg-black text-white hover:bg-gray-800"
                       onClick={() => {
                         navigate("/signup");
                         setToggle(false);

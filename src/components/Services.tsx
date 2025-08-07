@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { serviceItems } from "../constants";
-import { styles } from "../styles";
 import { motion } from "framer-motion";
 import { fadeIn, slideIn, textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
@@ -15,8 +14,8 @@ const Services = () => {
           variants={textVariant(0.2)}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our <span className="gradient-text">Services</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
+            Our <span className="bg-gradient-to-r from-black to-gray-600 bg-clip-text text-transparent">Services</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We offer comprehensive web development solutions to help your business thrive in the digital world.
@@ -48,7 +47,7 @@ const Services = () => {
               >
                 {/* Service Icon */}
                 <div className="p-8 pb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-br from-black to-gray-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                     <img
                       src={item?.img}
                       alt={item?.title}
@@ -57,7 +56,7 @@ const Services = () => {
                   </div>
                   
                   {/* Service Title */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-black mb-4 group-hover:text-gray-600 transition-colors duration-300">
                     {item?.title}
                   </h3>
                   
@@ -69,7 +68,7 @@ const Services = () => {
 
                 {/* Hover Effect */}
                 <div className="px-8 pb-6">
-                  <div className="flex items-center text-blue-600 font-medium group-hover:translate-x-2 transition-transform duration-300">
+                  <div className="flex items-center text-black font-medium group-hover:translate-x-2 transition-transform duration-300">
                     <span>Learn More</span>
                     <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -86,22 +85,22 @@ const Services = () => {
           variants={fadeIn("up", "spring", 0.8, 1.5)}
           className="text-center mt-16"
         >
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-white">
+          <div className="bg-gradient-to-r from-black to-gray-800 rounded-3xl p-12 text-white">
             <h3 className="text-3xl font-bold mb-4">
               Ready to Start Your Project?
             </h3>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
               Let's discuss your requirements and create something amazing together.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                className="btn bg-white text-blue-600 hover:bg-gray-100"
+                className="btn bg-white text-black hover:bg-gray-100"
                 onClick={() => navigate("/contactus")}
               >
                 Get Free Consultation
               </button>
               <button
-                className="btn btn-outline border-white text-white hover:bg-white hover:text-blue-600"
+                className="btn border-white text-white hover:bg-white hover:text-black"
                 onClick={() => navigate("/afterservice/0")}
               >
                 View All Services
