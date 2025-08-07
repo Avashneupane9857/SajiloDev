@@ -44,13 +44,13 @@ const Navbar = () => {
     <>
       {/* Desktop Navigation */}
       <div
-        className={`fixed w-full z-50 max-w-full overflow-x-hidden ${
+        className={`fixed w-full z-[9999] max-w-full overflow-visible ${
           scrolled 
             ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' 
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-16 flex items-center justify-between w-full overflow-x-hidden">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-16 flex items-center justify-between w-full overflow-visible">
           {/* Logo */}
           <div
             className="flex items-center cursor-pointer"
@@ -68,11 +68,11 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8 overflow-visible">
             {navLinks?.map((nav, index) => (
               <div
                 key={index}
-                className="relative group"
+                className="relative group overflow-visible"
                 onMouseEnter={() => {
                   if (nav.title === "Services") {
                     setShowDropdown(true);
@@ -105,7 +105,12 @@ const Navbar = () => {
                 {/* Services Dropdown */}
                 {nav.title === "Services" && showDropdown && (
                   <div
-                    className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50"
+                    className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-[9999] overflow-visible"
+                    style={{ 
+                      position: 'absolute',
+                      zIndex: 9999,
+                      minWidth: '256px'
+                    }}
                     onMouseLeave={() => setShowDropdown(false)}
                     onMouseOver={() => handleMouseOverDropdown()}
                   >
@@ -174,7 +179,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-3 rounded-lg bg-white shadow-lg border border-gray-200 z-20 flex-shrink-0"
+            className="lg:hidden p-3 rounded-lg bg-white shadow-lg border border-gray-200 z-[9999] flex-shrink-0"
             style={{ maxWidth: 48, minWidth: 48 }}
             onClick={() => setToggle(!toggle)}
           >
@@ -188,8 +193,8 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {toggle && (
-          <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-200 z-50">
-            <div className="px-6 py-4 space-y-4">
+          <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-200 z-[9999] max-w-full overflow-visible">
+            <div className="px-4 sm:px-6 py-4 space-y-4 w-full">
               {/* Mobile Navigation Links */}
               <div className="space-y-2">
                 {navLinks.map((link, index) => (

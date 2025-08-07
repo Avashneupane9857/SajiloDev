@@ -12,9 +12,9 @@ import FAQs from "../components/Faqs";
 
 const HomePage = () => {
   return (
-    <div className="w-full min-h-screen flex flex-col bg-white overflow-x-hidden">
+    <div className="w-full min-h-screen flex flex-col bg-white overflow-x-hidden" style={{ zIndex: 1 }}>
       <Navbar />
-      <div className="flex flex-col gap-8 sm:gap-12 pt-0 sm:pt-0 overflow-x-hidden">
+      <div className="flex flex-col gap-8 sm:gap-12 pt-0 sm:pt-0 overflow-x-hidden" style={{ zIndex: 1 }}>
         <Hero />
         <Works />
         <Services />
