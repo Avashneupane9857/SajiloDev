@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { currUser, isLoggedIn, loginErr } from "../store";
 import { addDoc, collection } from "firebase/firestore";

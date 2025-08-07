@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { google, login } from "../assets";
+import { google } from "../assets";
 import Navbar from "../components/Navbar";
 import { useSetRecoilState } from "recoil";
 import { currUser } from "../store";
@@ -17,7 +17,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa6";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { motion } from "framer-motion";
-import { fadeIn, slideIn } from "../utils/motion";
+import { slideIn } from "../utils/motion";
 
 interface FormData {
   name: string;
@@ -217,12 +217,7 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
-      <Navbar
-        logo=""
-        bgColor="bg-transparent"
-        textColor="text-white"
-        borderColor=""
-      />
+      <Navbar />
       
       <div className="flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8 pt-32">
         <div className="max-w-md w-full">

@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { serviceItems } from "../constants";
-import { motion } from "framer-motion";
-import { fadeIn, slideIn, textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 
 const Services = () => {

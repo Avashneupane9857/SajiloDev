@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { workItems } from "../constants";
-import { SpotlightPreview } from "./SpotlightPreview";
 import { motion } from "framer-motion";
-import { fadeIn, slideIn } from "../utils/motion";
+import { fadeIn } from "../utils/motion";
 import { useNavigate } from "react-router-dom";
 import SectionWrapper from "../hoc/SectionWrapper";
 
@@ -79,7 +78,7 @@ const Hero = () => {
                 Start Your Project
               </button>
               <button
-                className="btn btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-black"
+                className="btn btn-outline text-lg px-8 py-4 bg-white/5 border-2 border-white/50 text-white hover:bg-white hover:text-black transition-all duration-300"
                 onClick={() => navigate("/contactus")}
               >
                 Get Free Quote

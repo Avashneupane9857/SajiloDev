@@ -2,7 +2,7 @@ import logo from "./logo.png";
 import logo1 from "./logo1.png";
 import def from "./default.svg";
 import pdf from "./pdf.png";
-
+import sidd from "./founders/sidd.png";
 import facebook from "./socialMedias/facebook.png";
 import twitter from "./socialMedias/twitter.png";
 import youtube from "./socialMedias/youtube.jpg";
@@ -80,6 +80,7 @@ export {
   github,
   insta,
   linkedin,
+  sidd,
   google,
   customer1,
   customer2,

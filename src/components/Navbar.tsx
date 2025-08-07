@@ -6,19 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { currUser, isLoggedIn } from "../store";
 import { useState, useEffect } from "react";
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from "react-icons/ai";
-import { ImCross } from "react-icons/im";
 
-const Navbar = ({
-  bgColor,
-  textColor,
-  borderColor,
-  logo,
-}: {
-  bgColor: string;
-  textColor: string;
-  borderColor: string;
-  logo: string;
-}) => {
+const Navbar = () => {
   const navigate = useNavigate();
   const isLogIn = useRecoilValue(isLoggedIn);
   const [showDropdown, setShowDropdown] = useState(false);

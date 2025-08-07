@@ -34,6 +34,7 @@ import {
   work3,
   work4,
   work5,
+  sidd,
   work6,
 } from "../assets";
 
@@ -253,7 +254,7 @@ export const founders = [
   {
     img: dipen,
     vanai:
-      "<q>With three years of tech expertise, we came up with this to simplify digital solutions, ensuring every client's success.</q>",
+      "<q>With four years of tech expertise, we came up with this to simplify digital solutions, ensuring every client's success.</q>",
     github: "https://github.com/dipenbhat557",
     linkedin: "https://www.linkedin.com/in/dipendra-bhatta-38ba32259/",
     instagram: "https://www.instagram.com/dipenbhat557/",
@@ -265,6 +266,14 @@ export const founders = [
     github: "https://github.com/Avashneupane9857",
     linkedin: "https://www.linkedin.com/in/avash-neupane-a85877264/",
     instagram: "https://www.instagram.com/avash__22/",
+  },
+  {
+    img: sidd,
+    vanai:
+      "<q>With three years of tech and DevOps expertise, we craft streamlined digital solutions designed to drive every client's success.</q>",
+    github: "https://github.com/siddhu12980",
+    linkedin: "https://www.linkedin.com/in/siddhu12980/",
+    instagram: "https://www.instagram.com/siddhu12980/",
   },
 ];
 

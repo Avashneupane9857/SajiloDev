@@ -72,13 +72,8 @@ const ContactUs: React.FC = () => {
   };
 
   return (
-    <>
-      <Navbar
-        logo=""
-        bgColor="bg-black"
-        textColor="text-white"
-        borderColor=""
-      />
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+      <Navbar />
       
       {/* Hero Section */}
       <div className="relative py-20 bg-gradient-to-br from-black to-gray-900">
@@ -98,7 +93,7 @@ const ContactUs: React.FC = () => {
       </div>
 
       {/* Success Message */}
-      {formSubmitted && (
+          {formSubmitted && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -114,12 +109,12 @@ const ContactUs: React.FC = () => {
               <span className="text-green-800 font-semibold text-lg">Message Sent Successfully!</span>
             </div>
             <p className="text-green-600">Thank you for contacting us. We'll get back to you soon!</p>
-          </div>
+        </div>
         </motion.div>
       )}
 
       {/* Contact Form Section */}
-      {!formSubmitted && (
+        {!formSubmitted && (
         <div className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12">
@@ -185,8 +180,8 @@ const ContactUs: React.FC = () => {
                     <div>
                       <h3 className="font-semibold text-black">LinkedIn</h3>
                       <p className="text-gray-600">sajilo-dev</p>
-                    </div>
-                  </div>
+                </div>
+                </div>
                 </div>
               </motion.div>
 
@@ -275,13 +270,13 @@ const ContactUs: React.FC = () => {
                 </form>
               </motion.div>
             </div>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <GettingSite />
-      <Footer />
-    </>
+        <GettingSite />
+        <Footer />
+    </div>
   );
 };
 

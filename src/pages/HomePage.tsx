@@ -8,18 +8,13 @@ import Services from "../components/Services";
 import TechStack from "../components/TechStack";
 import Works from "../components/Works";
 import Footer from "../components/Footer";
-import { logo } from "../assets";
+
 import FAQs from "../components/Faqs";
 
 const HomePage = () => {
   return (
     <>
-      <Navbar
-        logo={logo}
-        bgColor=""
-        textColor=""
-        borderColor=""
-      />
+      <Navbar />
       <Hero />
       <Works />
       <Services />

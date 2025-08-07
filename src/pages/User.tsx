@@ -77,13 +77,8 @@ const User = () => {
   useEffect(() => console.log(auth.currentUser), []);
 
   return (
-    <>
-      <Navbar
-        logo=""
-        bgColor="bg-black"
-        textColor="text-white"
-        borderColor=""
-      />
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+      <Navbar />
       
       {/* Hero Section */}
       <div className="relative py-20 bg-gradient-to-br from-black to-gray-900">
@@ -243,7 +238,7 @@ const User = () => {
       <Works />
       <Reviews />
       <Footer />
-    </>
+    </div>
   );
 };
 

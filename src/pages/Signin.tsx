@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { google, login } from "../assets";
+import { google } from "../assets";
 import Navbar from "../components/Navbar";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { currUser, loginErr } from "../store";
@@ -16,7 +16,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa6";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { motion } from "framer-motion";
-import { fadeIn, slideIn } from "../utils/motion";
+import { slideIn } from "../utils/motion";
 
 interface FormData {
   email: string;
@@ -202,12 +202,7 @@ const Signin = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
-      <Navbar
-        logo=""
-        bgColor="bg-transparent"
-        textColor="text-white"
-        borderColor=""
-      />
+      <Navbar />
       
       {loginError && (
         <motion.div
