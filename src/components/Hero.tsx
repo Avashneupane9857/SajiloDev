@@ -137,7 +137,7 @@ const Hero = () => {
                         src={work?.img}
                         alt={work?.title}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                         <div className="absolute bottom-4 left-4 text-white">
                           <h3 className="font-semibold text-sm">{work?.title}</h3>
                           <p className="text-xs text-gray-300">View Project</p>
@@ -159,7 +159,7 @@ const Hero = () => {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute -top-4 -right-4 w-20 h-20 bg-white/20 rounded-full blur-xl"
+                className="absolute -top-4 -right-4 w-20 h-20 bg-white/20 rounded-full blur-xl pointer-events-none"
               />
               <motion.div
                 animate={{ 
@@ -171,7 +171,7 @@ const Hero = () => {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute -bottom-4 -left-4 w-16 h-16 bg-gray-400/20 rounded-full blur-xl"
+                className="absolute -bottom-4 -left-4 w-16 h-16 bg-gray-400/20 rounded-full blur-xl pointer-events-none"
               />
             </div>
 
@@ -180,7 +180,7 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="absolute inset-0 flex items-center justify-center"
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
               >
                 <div className="glass rounded-2xl px-6 py-4 text-white text-center">
                   <h3 className="text-xl font-bold mb-2">Our Portfolio</h3>

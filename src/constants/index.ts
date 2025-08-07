@@ -278,33 +278,33 @@ export const images = [
 ];
 export const faqs = [
   {
-    question: "What is React?",
+    question: "What services do you offer for web development?",
     answer:
-      "  React is a JavaScript library for building user interfacesReact is a JavaScript library for building user interfacesReact is a JavaScript library for building user interfacesReact is a JavaScript library for building user interfacesReact is a JavaScript library for building user interfacesReact is a JavaScript library for building user interfaces React is a JavaScript library for building user interfaces.",
+      "We offer comprehensive web development services including static websites, dynamic websites, e-commerce solutions, custom web applications, UI/UX design, website maintenance, hosting services, and domain registration. Our team specializes in modern technologies like React, Next.js, Node.js, and more to deliver high-quality, scalable solutions.",
   },
   {
-    question: "What is TypeScript?",
+    question: "How long does it take to complete a website project?",
     answer:
-      "  TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static  TypeScript is a superset of JavaScript that adds static typing.",
+      "Project timelines vary depending on complexity and requirements. A simple static website typically takes 1-2 weeks, while complex dynamic websites or e-commerce platforms may take 4-8 weeks. We provide detailed timelines during our initial consultation and keep you updated throughout the development process.",
   },
   {
-    question: "What is TypeScript?",
+    question: "Do you provide hosting and domain services?",
     answer:
-      "  TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static  TypeScript is a superset of JavaScript that adds static typing.",
+      "Yes, we offer complete hosting solutions including domain registration, SSL certificates, and reliable hosting with 99.9% uptime guarantee. We can also help migrate existing websites to our hosting platform or set up hosting for new projects.",
   },
   {
-    question: "What is TypeScript?",
+    question: "What is your pricing structure for web development?",
     answer:
-      "  TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static  TypeScript is a superset of JavaScript that adds static typing.",
+      "Our pricing is project-based and depends on the scope, features, and complexity. We offer transparent pricing with no hidden costs. We provide detailed quotes after understanding your requirements, and we're happy to work within your budget while ensuring quality results.",
   },
   {
-    question: "What is TypeScript?",
+    question: "Do you provide ongoing support and maintenance?",
     answer:
-      "  TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static  TypeScript is a superset of JavaScript that adds static typing.",
+      "Absolutely! We offer comprehensive maintenance packages including regular updates, security monitoring, performance optimization, and technical support. We also provide training for your team to manage basic content updates independently.",
   },
   {
-    question: "What is TypeScript?",
+    question: "Can you redesign or upgrade my existing website?",
     answer:
-      "  TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static TypeScript is a superset of JavaScript that adds static  TypeScript is a superset of JavaScript that adds static typing.",
+      "Yes, we specialize in website upgrades and redesigns. We can modernize your existing site, improve performance, enhance user experience, add new features, or completely redesign it with a fresh, modern look while preserving your brand identity.",
   },
 ];
