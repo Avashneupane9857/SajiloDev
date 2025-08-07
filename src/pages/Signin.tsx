@@ -15,8 +15,6 @@ import { auth, db } from "../firebaseConfig";
 import { FaFacebook } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa6";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { motion } from "framer-motion";
-import { slideIn } from "../utils/motion";
 
 interface FormData {
   email: string;
@@ -205,22 +203,15 @@ const Signin = () => {
       <Navbar />
       
       {loginError && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full bg-red-500/10 border-b border-red-500/20 text-red-400 font-semibold text-center p-4 backdrop-blur-sm"
-        >
+        <div className="w-full bg-red-500/10 border-b border-red-500/20 text-red-400 font-semibold text-center p-4 backdrop-blur-sm">
           Please Login before performing this action!
-        </motion.div>
+        </div>
       )}
       
       <div className="flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8 pt-32">
         <div className="max-w-md w-full">
           {/* Login Form */}
-          <motion.div
-            variants={slideIn("up", "spring", 0.6, 1.4)}
-            className="bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-2xl border border-white/20"
-          >
+          <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-2xl border border-white/20">
             <div className="space-y-8">
               <div className="text-center">
                 <h2 className="text-4xl font-bold text-white mb-3">Sign In</h2>
@@ -245,7 +236,7 @@ const Signin = () => {
                     onChange={handleChange}
                     value={formData.email}
                     required
-                    className={`w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-300 bg-white/10 text-white placeholder-gray-400 ${
+                    className={`w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-white focus:border-transparent bg-white/10 text-white placeholder-gray-400 ${
                       error ? 'border-red-500/50' : 'border-white/20'
                     }`}
                   />
@@ -263,14 +254,14 @@ const Signin = () => {
                       onChange={handleChange}
                       value={formData.password}
                       required
-                      className={`w-full px-4 py-4 pr-12 border rounded-xl focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-300 bg-white/10 text-white placeholder-gray-400 ${
+                      className={`w-full px-4 py-4 pr-12 border rounded-xl focus:ring-2 focus:ring-white focus:border-transparent bg-white/10 text-white placeholder-gray-400 ${
                         error ? 'border-red-500/50' : 'border-white/20'
                       }`}
                     />
                     <button
                       type="button"
                       onClick={togglePasswordVisibility}
-                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-300"
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
                     >
                       {showPassword ? "🙈" : "👁"}
                     </button>
@@ -297,19 +288,19 @@ const Signin = () => {
               <div className="grid grid-cols-3 gap-4">
                 <button
                   onClick={handleGoogleSignIn}
-                  className="flex items-center justify-center p-4 border border-white/20 rounded-xl hover:bg-white/10 transition-all duration-300"
+                  className="flex items-center justify-center p-4 border border-white/20 rounded-xl hover:bg-white/10"
                 >
                   <img src={google} alt="Google" className="w-6 h-6" />
                 </button>
                 <button
                   onClick={handleGithubSignIn}
-                  className="flex items-center justify-center p-4 border border-white/20 rounded-xl hover:bg-white/10 transition-all duration-300"
+                  className="flex items-center justify-center p-4 border border-white/20 rounded-xl hover:bg-white/10"
                 >
                   <FaGithub className="w-6 h-6 text-white" />
                 </button>
                 <button
                   onClick={handleFacebookSignIn}
-                  className="flex items-center justify-center p-4 border border-white/20 rounded-xl hover:bg-white/10 transition-all duration-300"
+                  className="flex items-center justify-center p-4 border border-white/20 rounded-xl hover:bg-white/10"
                 >
                   <FaFacebook className="w-6 h-6 text-blue-400" />
                 </button>
@@ -327,7 +318,7 @@ const Signin = () => {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>

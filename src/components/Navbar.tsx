@@ -44,13 +44,13 @@ const Navbar = () => {
     <>
       {/* Desktop Navigation */}
       <div
-        className={`fixed w-full z-50 transition-all duration-300 ${
+        className={`fixed w-full z-50 max-w-full overflow-x-hidden ${
           scrolled 
             ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' 
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-16 flex items-center justify-between w-full overflow-x-hidden">
           {/* Logo */}
           <div
             className="flex items-center cursor-pointer"
@@ -61,12 +61,8 @@ const Navbar = () => {
                 <span className="text-white font-bold text-xl">S</span>
               </div>
               <div className="flex flex-col">
-                <span className={`font-bold text-2xl ${scrolled ? 'text-black' : 'text-white'}`}>
-                  Sajilo
-                </span>
-                <span className={`font-semibold text-sm ${scrolled ? 'text-gray-600' : 'text-gray-300'}`}>
-                  Dev
-                </span>
+                <span className={`font-bold text-2xl ${scrolled ? 'text-black' : 'text-white'}`}>Sajilo</span>
+                <span className={`font-semibold text-sm ${scrolled ? 'text-gray-600' : 'text-gray-300'}`}>Dev</span>
               </div>
             </div>
           </div>
@@ -89,7 +85,7 @@ const Navbar = () => {
                 }}
               >
                 <button
-                  className={`flex items-center space-x-1 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                  className={`flex items-center space-x-1 px-4 py-2 rounded-lg font-medium ${
                     scrolled 
                       ? 'text-gray-700 hover:text-black hover:bg-gray-100' 
                       : 'text-white hover:text-gray-200'
@@ -116,7 +112,7 @@ const Navbar = () => {
                     {serviceDropdowns?.map((service, index) => (
                       <button
                         key={index}
-                        className="w-full text-left px-4 py-3 hover:bg-gray-100 hover:text-black transition-colors duration-200 text-sm font-medium text-gray-700"
+                        className="w-full text-left px-4 py-3 hover:bg-gray-100 hover:text-black text-sm font-medium text-gray-700"
                         onClick={() => {
                           navigate(`/afterservice/${index + 1}`);
                           setShowDropdown(false);
@@ -136,7 +132,7 @@ const Navbar = () => {
             {!isLogIn ? (
               <>
                 <button
-                  className={`font-medium transition-all duration-300 ${
+                  className={`font-medium ${
                     scrolled ? 'text-gray-700 hover:text-black' : 'text-white hover:text-gray-200'
                   }`}
                   onClick={() => navigate("/signin")}
@@ -155,7 +151,7 @@ const Navbar = () => {
             ) : (
               <div className="flex items-center space-x-4">
                 <button
-                  className={`font-medium transition-all duration-300 ${
+                  className={`font-medium ${
                     scrolled ? 'text-gray-700 hover:text-black' : 'text-white hover:text-gray-200'
                   }`}
                   onClick={() => navigate("/orders")}
@@ -163,7 +159,7 @@ const Navbar = () => {
                   Orders
                 </button>
                 <div
-                  className="w-10 h-10 rounded-full overflow-hidden cursor-pointer border-2 border-white shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="w-10 h-10 rounded-full overflow-hidden cursor-pointer border-2 border-white shadow-lg hover:shadow-xl"
                   onClick={() => navigate("/user")}
                 >
                   <img
@@ -178,13 +174,14 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-lg transition-all duration-300"
+            className="lg:hidden p-3 rounded-lg bg-white shadow-lg border border-gray-200 z-20 flex-shrink-0"
+            style={{ maxWidth: 48, minWidth: 48 }}
             onClick={() => setToggle(!toggle)}
           >
             {toggle ? (
-              <AiOutlineMenuUnfold className={`text-2xl ${scrolled ? 'text-gray-700' : 'text-white'}`} />
+              <AiOutlineMenuUnfold className="text-2xl text-gray-700" />
             ) : (
-              <AiOutlineMenuFold className={`text-2xl ${scrolled ? 'text-gray-700' : 'text-white'}`} />
+              <AiOutlineMenuFold className="text-2xl text-gray-700" />
             )}
           </button>
         </div>
@@ -198,7 +195,7 @@ const Navbar = () => {
                 {navLinks.map((link, index) => (
                   <button
                     key={index}
-                    className="w-full text-left py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-gray-100 hover:text-black transition-all duration-300"
+                    className="w-full text-left py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-gray-100 hover:text-black"
                     onClick={() => {
                       if (link.title === "Services") {
                         // Handle services dropdown in mobile
@@ -219,7 +216,7 @@ const Navbar = () => {
                 {!isLogIn ? (
                   <div className="space-y-3">
                     <button
-                      className="w-full py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition-all duration-300"
+                      className="w-full py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-gray-100"
                       onClick={() => {
                         navigate("/signin");
                         setToggle(false);
@@ -240,7 +237,7 @@ const Navbar = () => {
                 ) : (
                   <div className="flex items-center justify-between">
                     <button
-                      className="py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition-all duration-300"
+                      className="py-3 px-4 rounded-lg font-medium text-gray-700 hover:bg-gray-100"
                       onClick={() => {
                         navigate("/orders");
                         setToggle(false);

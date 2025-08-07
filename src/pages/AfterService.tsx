@@ -9,8 +9,6 @@ import { currUser, isLoggedIn } from "../store";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebaseConfig";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-import { motion } from "framer-motion";
-import { fadeIn, slideIn } from "../utils/motion";
 
 interface User {
   email: string | null;
@@ -108,33 +106,25 @@ const AfterService = ({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black overflow-x-hidden w-full">
       <Navbar />
-      
       {/* Hero Section */}
-      <div className="relative py-20 bg-gradient-to-br from-black to-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            variants={fadeIn("up", "spring", 0.6, 1)}
-            className="text-center"
-          >
+      <div className="relative py-20 bg-gradient-to-br from-black to-gray-900 w-full overflow-x-hidden">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 w-full overflow-x-hidden">
+          <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               {afterClickItems[currentService]?.title}
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               {afterClickItems[currentService]?.desc}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* Success Message */}
       {formSubmitted && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-8"
-        >
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 -mt-10 mb-8 w-full overflow-x-hidden">
           <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
             <div className="flex items-center justify-center gap-3 mb-2">
               <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
@@ -146,24 +136,21 @@ const AfterService = ({
             </div>
             <p className="text-green-600">Thank you for choosing us! We'll contact you soon.</p>
           </div>
-        </motion.div>
+        </div>
       )}
 
       {/* Order Form Section */}
       {!formSubmitted && (
-        <div className="py-20 bg-gray-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              variants={slideIn("up", "spring", 0.6, 1.4)}
-              className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200"
-            >
+        <div className="py-20 bg-gray-50 w-full overflow-x-hidden">
+          <div className="max-w-4xl mx-auto px-2 sm:px-4 lg:px-8 w-full overflow-x-hidden">
+            <div className="bg-white rounded-2xl p-4 sm:p-8 shadow-lg border border-gray-200 w-full overflow-x-hidden">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-black mb-2">Place Your Order</h2>
                 <p className="text-gray-600">Fill out the form below to get started with your project.</p>
               </div>
 
-              <form onSubmit={handleProceed} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+              <form onSubmit={handleProceed} className="space-y-6 w-full overflow-x-hidden">
+                <div className="grid md:grid-cols-2 gap-6 w-full overflow-x-hidden">
                   {/* Left Column */}
                   <div className="space-y-6">
                     <div>
@@ -171,7 +158,7 @@ const AfterService = ({
                         Service Type *
                       </label>
                       <select
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
                         onChange={handleServiceChange}
                         value={currentService}
                       >
@@ -191,7 +178,7 @@ const AfterService = ({
                       </label>
                       <input
                         type="text"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
                         placeholder="Write your contact number"
                         name="contact"
                         value={formData.contact}
@@ -206,7 +193,7 @@ const AfterService = ({
                       </label>
                       <input
                         type="text"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
                         placeholder="Write your location"
                         name="location"
                         value={formData.location}
@@ -223,7 +210,7 @@ const AfterService = ({
                         Order Type *
                       </label>
                       <select
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
                         onChange={handleOrderChange}
                         value={currentOrder}
                       >
@@ -241,7 +228,7 @@ const AfterService = ({
                       </label>
                       <textarea
                         rows={8}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300 resize-none"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent resize-none"
                         placeholder="Please tell us about the product you desire"
                         name="additionalInfo"
                         value={formData.additionalInfo}
@@ -261,7 +248,7 @@ const AfterService = ({
                   </button>
                 </div>
               </form>
-            </motion.div>
+            </div>
           </div>
         </div>
       )}

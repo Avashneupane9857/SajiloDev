@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { slideIn } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 
 const Domain = () => {
@@ -43,17 +41,9 @@ const Domain = () => {
   };
 
   return (
-    <motion.div
-      variants={slideIn("left", "spring", 0.6, 1.6)}
-      className="w-full py-20 bg-gradient-to-r from-black to-gray-900"
-    >
+    <div className="w-full py-20 bg-gradient-to-r from-black to-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="space-y-6"
-        >
+        <div className="space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             Secure Your Domain Now
           </h2>
@@ -62,14 +52,9 @@ const Domain = () => {
             domain is your unique online identity, your digital storefront in the
             vast landscape of the internet.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mt-8"
-        >
+        <div className="mt-8">
           <div className="max-w-2xl mx-auto">
             <div className="bg-white rounded-2xl p-2 shadow-xl border border-gray-200">
               <div className="flex flex-col sm:flex-row gap-2">
@@ -82,7 +67,7 @@ const Domain = () => {
                   onKeyPress={(e) => e.key === 'Enter' && handleFindDomain()}
                 />
                 <button
-                  className="px-8 py-4 bg-black text-white rounded-xl font-semibold hover:bg-gray-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-8 py-4 bg-black text-white rounded-xl font-semibold hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
                   onClick={handleFindDomain}
                   disabled={loading || !domainName}
                 >
@@ -99,15 +84,11 @@ const Domain = () => {
             </div>
 
             {availability !== null && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className={`mt-4 p-4 rounded-xl ${
-                  availability 
-                    ? 'bg-green-50 border border-green-200 text-green-800' 
-                    : 'bg-red-50 border border-red-200 text-red-800'
-                }`}
-              >
+              <div className={`mt-4 p-4 rounded-xl ${
+                availability 
+                  ? 'bg-green-50 border border-green-200 text-green-800' 
+                  : 'bg-red-50 border border-red-200 text-red-800'
+              }`}>
                 <div className="flex items-center gap-2">
                   <div className={`w-2 h-2 rounded-full ${
                     availability ? 'bg-green-500' : 'bg-red-500'
@@ -116,18 +97,13 @@ const Domain = () => {
                     {availability ? "Domain available!" : "Domain not available."}
                   </span>
                 </div>
-              </motion.div>
+              </div>
             )}
           </div>
-        </motion.div>
+        </div>
 
         {/* Additional Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mt-12 grid md:grid-cols-3 gap-6 text-white"
-        >
+        <div className="mt-12 grid md:grid-cols-3 gap-6 text-white">
           <div className="text-center">
             <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,9 +133,9 @@ const Domain = () => {
             <h3 className="font-semibold mb-1">Fast Setup</h3>
             <p className="text-sm text-gray-300">Quick domain configuration</p>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
