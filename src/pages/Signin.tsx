@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { google, login, logo1 } from "../assets";
+import { google, login } from "../assets";
 import Navbar from "../components/Navbar";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { currUser, loginErr } from "../store";
@@ -15,6 +15,8 @@ import { auth, db } from "../firebaseConfig";
 import { FaFacebook } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa6";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { motion } from "framer-motion";
+import { fadeIn, slideIn } from "../utils/motion";
 
 interface FormData {
   email: string;
@@ -48,6 +50,7 @@ const Signin = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, formData.email, formData.password)
@@ -198,139 +201,177 @@ const Signin = () => {
   }, []);
 
   return (
-    <div className="h-screen overflow-y-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
       <Navbar
-        logo={logo1}
-        bgColor="bg-white"
-        textColor="text-black"
-        borderColor="border border-[#E0E0E9]"
+        logo=""
+        bgColor="bg-transparent"
+        textColor="text-white"
+        borderColor=""
       />
+      
       {loginError && (
-        <div className="w-full h-[50px] text-red-800 font-semibold text-[17px] top-20 text-center absolute p-2">
-          Please Login before performing this action !!
-        </div>
-      )}
-      <div className=" sm:h-[97%] h-[90%] w-full flex justify-around flex-col">
-        <div
-          className={`items-center justify-center sm:p-36 w-full h-[89%] sm:h-[96%] flex  bg-[#F0F4FC] shadow-slate-500 shadow-sm`}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full bg-red-500/10 border-b border-red-500/20 text-red-400 font-semibold text-center p-4 backdrop-blur-sm"
         >
-          <div className="w-[60%] h-[80%]  hidden sm:flex flex-col gap-3">
-            <div className="flex flex-col w-[40%]">
-              <p className="font-semibold text-[25px] font-serif">Welcome to</p>
-              <p className="font-bold text-[35px] font-serif">SajiloDev</p>
-            </div>
-            <p className="leading-loose text-[10px]">
-              Here, we believe that building a strong professional network
-              begins with your participation.
-              <br />
-              We are delighted to offer a modern and user-friendly service to
-              ensure you have the best experience.
-            </p>
-            <button
-              className=" w-[30%] rounded-lg py-2 bg-[#4461F2] text-white font-serif"
-              onClick={() => navigate("/afterservice/1")}
+          Please Login before performing this action!
+        </motion.div>
+      )}
+      
+      <div className="flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl w-full">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Welcome Section */}
+            <motion.div
+              variants={slideIn("left", "spring", 0.6, 1.4)}
+              className="hidden lg:block space-y-8"
             >
-              Get your Own Site
-            </button>
-            <img
-              src={login}
-              alt="login bg"
-              className="w-[80%] h-[60%] object-contain"
-            />
-          </div>
-          <div className="w-[80%] sm:w-[38%] h-auto sm:h-[80%] flex flex-col justify-around gap-8">
-            <p className="text-[22px] font-semibold">Log in</p>
-            <form
-              onSubmit={handleSubmit}
-              className="w-full h-[50%] sm:h-[70%] gap-8 flex flex-col"
-            >
-              {error && (
-                <p className="text-red-500 text-[8px] p-2">Try again !!</p>
-              )}
-              <input
-                type="text"
-                name="email"
-                placeholder="Enter Email or Phone"
-                onChange={handleChange}
-                value={formData.email}
-                className={`px-8 py-2 placeholder:text-[10px] placeholder:text-slate-700  ${
-                  error
-                    ? "shadow-red-700 shadow-lg"
-                    : "shadow-slate-600 shadow-sm"
-                } rounded-md`}
-              />
-              <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="Password"
-                  onChange={handleChange}
-                  value={formData.password}
-                  className={`w-full px-8 -z-10 py-2 placeholder:text-[10px] placeholder:text-slate-700 ${
-                    error
-                      ? "shadow-lg shadow-red-700"
-                      : "shadow-sm shadow-slate-600"
-                  } rounded-md`}
-                />
+              <div className="space-y-8">
+                <div>
+                  <h1 className="text-5xl font-bold text-white mb-4">Welcome to</h1>
+                  <h1 className="text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    SajiloDev
+                  </h1>
+                </div>
+                <p className="text-xl text-gray-300 leading-relaxed">
+                  Here, we believe that building a strong professional network begins with your participation. 
+                  We are delighted to offer a modern and user-friendly service to ensure you have the best experience.
+                </p>
                 <button
-                  type="button"
-                  onClick={togglePasswordVisibility}
-                  className="absolute right-2 top-2 z-30 "
+                  className="btn bg-white text-black hover:bg-gray-100 text-lg px-8 py-4"
+                  onClick={() => navigate("/afterservice/1")}
                 >
-                  {showPassword ? "🙈" : "👁"}
+                  Get Your Own Site
                 </button>
               </div>
-              <button
-                type="submit"
-                className="w-[45%] mx-auto sm:px-8 py-2 rounded-lg bg-[#4461F2] text-white text-[12px] font-medium"
-              >
-                Sign in
-              </button>
-            </form>
-            <div className="flex gap-3 h-[5%] items-center justify-center">
-              <div className="border-b border-slate-700 w-[25px]" />
-              <p className="text-slate-700 text-[10px] my-4">
-                Or Continue with
-              </p>
-              <div className="border-b border-slate-700 w-[25px]" />
-            </div>
-            <div className="w-[70%] h-[13%] flex items-center mx-auto justify-around">
-              <div className="w-[12%] sm:w-[8%] h-full">
+              
+              <div className="relative">
                 <img
-                  src={google}
-                  alt="google logo"
-                  className="w-full h-full object-contain cursor-pointer  "
-                  onClick={handleGoogleSignIn}
+                  src={login}
+                  alt="Login illustration"
+                  className="w-full h-auto object-contain"
                 />
               </div>
+            </motion.div>
 
-              <FaGithub
-                onClick={handleGithubSignIn}
-                className="cursor-pointer text-3xl "
-              />
-              <FaFacebook
-                onClick={handleFacebookSignIn}
-                className="cursor-pointer text-3xl text-blue-800"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="w-full h-[6%] flex flex-col-reverse sm:flex-row items-center justify-around sm:justify-between">
-          <div className="w-auto sm:w-[30%] h-full flex items-center justify-center">
-            <p className="font-serif font-light text-[14px]">
-              Copyright@2024 sajiloDev
-            </p>
-          </div>
-          <div className="w-full sm:w-[50%] text-[12px] sm:text-[14px] h-full flex items-center justify-evenly">
-            <p className="cursor-pointer">About</p>
-            <p className="cursor-pointer">Contact us</p>
-            <p className="cursor-pointer">Customer Support</p>
-            <p className="cursor-pointer">Jobs</p>
-            <p className="cursor-pointer">Subscription</p>
+            {/* Right Column - Login Form */}
+            <motion.div
+              variants={slideIn("right", "spring", 0.6, 1.4)}
+              className="bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-2xl border border-white/20"
+            >
+              <div className="space-y-8">
+                <div className="text-center">
+                  <h2 className="text-4xl font-bold text-white mb-3">Sign In</h2>
+                  <p className="text-gray-300 text-lg">Welcome back! Please sign in to your account.</p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {error && (
+                    <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
+                      <p className="text-red-400 text-sm">Invalid email or password. Please try again.</p>
+                    </div>
+                  )}
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-3">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      onChange={handleChange}
+                      value={formData.email}
+                      required
+                      className={`w-full px-4 py-4 border rounded-xl focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-300 bg-white/10 text-white placeholder-gray-400 ${
+                        error ? 'border-red-500/50' : 'border-white/20'
+                      }`}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-3">
+                      Password
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        placeholder="Enter your password"
+                        onChange={handleChange}
+                        value={formData.password}
+                        required
+                        className={`w-full px-4 py-4 pr-12 border rounded-xl focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-300 bg-white/10 text-white placeholder-gray-400 ${
+                          error ? 'border-red-500/50' : 'border-white/20'
+                        }`}
+                      />
+                      <button
+                        type="button"
+                        onClick={togglePasswordVisibility}
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-300"
+                      >
+                        {showPassword ? "🙈" : "👁"}
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full btn bg-white text-black hover:bg-gray-100 text-lg py-4 rounded-xl"
+                  >
+                    Sign In
+                  </button>
+                </form>
+
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-white/20" />
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="px-4 bg-transparent text-gray-400">Or continue with</span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4">
+                  <button
+                    onClick={handleGoogleSignIn}
+                    className="flex items-center justify-center p-4 border border-white/20 rounded-xl hover:bg-white/10 transition-all duration-300"
+                  >
+                    <img src={google} alt="Google" className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={handleGithubSignIn}
+                    className="flex items-center justify-center p-4 border border-white/20 rounded-xl hover:bg-white/10 transition-all duration-300"
+                  >
+                    <FaGithub className="w-6 h-6 text-white" />
+                  </button>
+                  <button
+                    onClick={handleFacebookSignIn}
+                    className="flex items-center justify-center p-4 border border-white/20 rounded-xl hover:bg-white/10 transition-all duration-300"
+                  >
+                    <FaFacebook className="w-6 h-6 text-blue-400" />
+                  </button>
+                </div>
+
+                <div className="text-center">
+                  <p className="text-gray-300 text-lg">
+                    Don't have an account?{" "}
+                    <button
+                      onClick={() => navigate("/signup")}
+                      className="text-white font-semibold hover:underline"
+                    >
+                      Sign up
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
 export default Signin;

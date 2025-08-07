@@ -2,12 +2,13 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import Footer from "../components/Footer";
 import GettingSite from "../components/GettingSite";
 import Navbar from "../components/Navbar";
-import { styles } from "../styles";
 import { IoCall } from "react-icons/io5";
 import { IoIosMail } from "react-icons/io";
 import emailjs from "emailjs-com";
-import { logo } from "../assets";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
+import { motion } from "framer-motion";
+import { fadeIn, slideIn } from "../utils/motion";
+
 interface FormData {
   name: string;
   email: string;
@@ -73,125 +74,213 @@ const ContactUs: React.FC = () => {
   return (
     <>
       <Navbar
-        logo={logo}
+        logo=""
         bgColor="bg-black"
         textColor="text-white"
         borderColor=""
       />
-      <div className="relative">
-        <div className="w-full bg-[#1F2123] h-[400px] sm:h-[550px] text-white relative -z-10 flex flex-col items-center justify-center gap-5">
-          <p className="font-serif text-[30px] font-medium">Get in touch</p>
-          <p className="leading-loose text-[14px] font-light text-center">
-            We will create our services the best in the town We will
-            <br /> create our services the best in the town
-          </p>
-        </div>
-        <div className="h-[680px] sm:h-[390px] w-full flex items-center justify-center -z-20">
-          {formSubmitted && (
-            <div className=" text-green-500 p-2 rounded-md border border-gray-300">
-              <p className="text-[#0766FF]">Thank you for choosing us!</p>
-            </div>
-          )}{" "}
-        </div>
-
-        {!formSubmitted && (
-          <div
-            className={`${styles.padding} top-[360px] sm:top-[390px] absolute bg-white left-[5%] sm:left-[15%] w-[90%] sm:w-[70%] mx-auto h-[700px] sm:h-[400px] rounded-md shadow-slate-400 shadow-sm flex flex-col justify-between sm:justify-around items-center`}
+      
+      {/* Hero Section */}
+      <div className="relative py-20 bg-gradient-to-br from-black to-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={fadeIn("up", "spring", 0.6, 1)}
+            className="text-center"
           >
-            <div className="w-full gap-6 sm:gap-3 h-full sm:h-[90%] flex flex-col sm:flex-row justify-between sm:justify-around items-center">
-              <div className="w-[90%] sm:w-[45%] text-white p-3 px-7 rounded-lg bg-[#1F2123] h-[40%] sm:h-full justify-around flex flex-col gap-2">
-                <p className="text-center font-serif text-[18px]">
-                  Contact information
-                </p>
-                <p className="text-center  text-[10px] font-light">
-                  We will create our services the best in the town We will
-                  create our services the best in the town
-                </p>
-                <div className="flex gap-3">
-                  <IoCall className="text-[#0766FF]" />
-                  <p className="text-[14px] font-light">+91-8545866043</p>
-                </div>
-                <div className="flex gap-3">
-                  <IoIosMail className="text-[#0766FF]" />
-                  <p className="text-[14px] font-light">
-                    sajilodev557@gmail.com
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Get in <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Touch</span>
+            </h1>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Ready to start your project? Let's discuss your requirements and create something amazing together.
+            </p>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Success Message */}
+      {formSubmitted && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-8"
+        >
+          <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span className="text-green-800 font-semibold text-lg">Message Sent Successfully!</span>
+            </div>
+            <p className="text-green-600">Thank you for contacting us. We'll get back to you soon!</p>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Contact Form Section */}
+      {!formSubmitted && (
+        <div className="py-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12">
+              {/* Contact Information */}
+              <motion.div
+                variants={slideIn("left", "spring", 0.6, 1.4)}
+                className="space-y-8"
+              >
+                <div>
+                  <h2 className="text-3xl font-bold text-black mb-4">
+                    Contact Information
+                  </h2>
+                  <p className="text-gray-600 leading-relaxed">
+                    Get in touch with us for any questions about our services or to start your next project.
                   </p>
                 </div>
-                <div className="flex gap-3">
-                  <FaInstagram className="text-[#0766FF]" />
-                  <p className="text-[14px] font-light">sajilodev</p>
+
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
+                      <IoCall className="text-white text-xl" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-black">Phone</h3>
+                      <p className="text-gray-600">+91-8545866043</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
+                      <IoIosMail className="text-white text-xl" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-black">Email</h3>
+                      <p className="text-gray-600">sajilodev557@gmail.com</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
+                      <FaInstagram className="text-white text-xl" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-black">Instagram</h3>
+                      <p className="text-gray-600">@sajilodev</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
+                      <FaFacebook className="text-white text-xl" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-black">Facebook</h3>
+                      <p className="text-gray-600">Sajilo Dev</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
+                      <FaLinkedin className="text-white text-xl" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-black">LinkedIn</h3>
+                      <p className="text-gray-600">sajilo-dev</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex gap-3">
-                  <FaFacebook className="text-[#0766FF]" />
-                  <p className="text-[14px] font-light">Sajilo Dev</p>
-                </div>
-                <div className="flex gap-3">
-                  <FaLinkedin className="text-[#0766FF]" />
-                  <p className="text-[14px] font-light">sajilo-dev</p>
-                </div>
-              </div>
-              <div className="w-[90%] sm:w-[45%] h-[60%] sm:h-full flex flex-col justify-around text-slate-500">
-                <form
-                  onSubmit={handleSubmit}
-                  className="w-full h-full flex flex-col gap-6 "
-                >
-                  <div className="flex flex-col sm:flex-row w-full items-center justify-between gap-6 sm:gap-3">
-                    <div className="flex w-full sm:w-[45%] flex-col gap-3">
-                      <p className="text-[13px]">Your name</p>
+              </motion.div>
+
+              {/* Contact Form */}
+              <motion.div
+                variants={slideIn("right", "spring", 0.6, 1.4)}
+                className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200"
+              >
+                <h2 className="text-2xl font-bold text-black mb-6">Send us a Message</h2>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Your Name
+                      </label>
                       <input
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full border-b text-[13px] px-1 border-slate-400"
+                        required
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300"
+                        placeholder="Enter your name"
                       />
                     </div>
-                    <div className="flex  w-full sm:w-[45%] flex-col gap-3">
-                      <p className="text-[13px]">Your Email</p>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Your Email
+                      </label>
                       <input
-                        type="text"
+                        type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full border-b  text-[13px] px-1 border-slate-400"
+                        required
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300"
+                        placeholder="Enter your email"
                       />
                     </div>
                   </div>
-                  <div className="flex flex-col gap-3">
-                    <p className="text-[13px]">Subject</p>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Subject
+                    </label>
                     <input
                       type="text"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full border-b  text-[13px] p-1 border-slate-400"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300"
+                      placeholder="What's this about?"
                     />
                   </div>
-                  <div className="flex flex-col gap-3">
-                    <p className="text-[13px]">Message</p>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Message
+                    </label>
                     <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Type your message here"
-                      className="w-full p-3 border-b  text-[13px] placeholder:text-[10px] border-slate-400"
+                      required
+                      rows={6}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300 resize-none"
+                      placeholder="Tell us about your project..."
                     />
                   </div>
+
                   <button
                     type="submit"
-                    className="bg-[#0766FF] text-serif text-white px-4  mx-auto font-serif text-[12px] py-2 rounded-full hover:bg-blue-700"
+                    disabled={loading}
+                    className="w-full btn bg-black text-white hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {loading ? "Sending..." : "Send message"}
+                    {loading ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Sending Message...
+                      </div>
+                    ) : (
+                      "Send Message"
+                    )}
                   </button>
                 </form>
-              </div>
+              </motion.div>
             </div>
           </div>
-        )}
+        </div>
+      )}
 
-        <GettingSite />
-        <Footer />
-      </div>
+      <GettingSite />
+      <Footer />
     </>
   );
 };

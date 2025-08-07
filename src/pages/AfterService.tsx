@@ -4,13 +4,13 @@ import Navbar from "../components/Navbar";
 import Services from "../components/Services";
 import Works from "../components/Works";
 import { afterClickItems } from "../constants";
-import { styles } from "../styles";
 import { useRecoilValue } from "recoil";
 import { currUser, isLoggedIn } from "../store";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebaseConfig";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-import { logo } from "../assets";
+import { motion } from "framer-motion";
+import { fadeIn, slideIn } from "../utils/motion";
 
 interface User {
   email: string | null;
@@ -110,113 +110,170 @@ const AfterService = ({
   return (
     <>
       <Navbar
-        logo={logo}
+        logo=""
         bgColor="bg-black"
         textColor="text-white"
         borderColor=""
       />
-      <div className="relative">
-        <div className="w-full bg-[#1F2123] h-[400px] sm:h-[550px] text-white relative -z-10 flex flex-col items-center justify-center gap-5">
-          <p className="font-serif text-[30px] sm:text-[44px] font-medium">
-            {afterClickItems[currentService]?.title}
-          </p>
-          <p className="leading-relaxed font-serif text-[18px] sm:text-[19px] w-[80%] sm:w-[50%] font-light text-center">
-            {afterClickItems[currentService]?.desc}
-          </p>
-        </div>
-        <div className="h-[850px] sm:h-[370px] w-full -z-20 flex justify-center items-center">
-          {formSubmitted && (
-            <div className=" text-green-500 p-2 rounded-md border border-gray-300">
-              <p className="text-[#0766FF]">Thank you for choosing us!</p>
-            </div>
-          )}{" "}
-        </div>
-
-        {!formSubmitted && (
-          <div
-            className={`${styles.padding} top-[370px] sm:top-[520px] absolute bg-white left-[5%]  w-[90%] h-[870px] sm:h-[400px] rounded-md shadow-slate-400 shadow-sm `}
+      
+      {/* Hero Section */}
+      <div className="relative py-20 bg-gradient-to-br from-black to-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={fadeIn("up", "spring", 0.6, 1)}
+            className="text-center"
           >
-            <form
-              onSubmit={handleProceed}
-              className="w-full h-full flex flex-col justify-around items-center"
-            >
-              <div className="w-full h-full sm:h-[90%] flex flex-col sm:flex-row  justify-around items-center">
-                <div className="w-[80%] sm:w-[35%] h-[40%] sm:h-full justify-around flex flex-col gap-1 sm:gap-3">
-                  <p className="font-serif ">Services</p>
-                  <select
-                    className="p-2 border border-slate-200 cursor-pointer rounded-md shadow-sm shadow-slate-300 mb-2 placeholder:text-[10px] sm:placeholder:text-[12px]"
-                    onChange={handleServiceChange}
-                    value={currentService}
-                  >
-                    <option value={0}>Select service</option>
-                    <option value={1}>Static Website</option>
-                    <option value={2}>Dynamic Website</option>
-                    <option value={3}>UI/UX</option>
-                    <option value={4}>Hosting</option>
-                    <option value={5}>Domain Registration</option>
-                    <option value={6}>Upgrade Your Website</option>
-                  </select>
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              {afterClickItems[currentService]?.title}
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              {afterClickItems[currentService]?.desc}
+            </p>
+          </motion.div>
+        </div>
+      </div>
 
-                  <p className="font-serif">Contact *</p>
-                  <input
-                    type="text"
-                    className="p-2 border border-slate-200 rounded-md shadow-sm shadow-slate-300 mb-2 placeholder:text-[12px]"
-                    placeholder="Write your contact number"
-                    name="contact"
-                    value={formData.contact}
-                    onChange={handleInputChange}
-                    required
-                  />
-                  <p className="font-serif">Location *</p>
-                  <input
-                    type="text"
-                    className="p-2 border border-slate-200 rounded-md shadow-sm shadow-slate-300 mb-2 placeholder:text-[12px]"
-                    placeholder="Write your Location"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleInputChange}
-                    required
-                  />
+      {/* Success Message */}
+      {formSubmitted && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-8"
+        >
+          <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span className="text-green-800 font-semibold text-lg">Order Submitted Successfully!</span>
+            </div>
+            <p className="text-green-600">Thank you for choosing us! We'll contact you soon.</p>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Order Form Section */}
+      {!formSubmitted && (
+        <div className="py-20 bg-gray-50">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              variants={slideIn("up", "spring", 0.6, 1.4)}
+              className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200"
+            >
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-black mb-2">Place Your Order</h2>
+                <p className="text-gray-600">Fill out the form below to get started with your project.</p>
+              </div>
+
+              <form onSubmit={handleProceed} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Left Column */}
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Service Type *
+                      </label>
+                      <select
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300"
+                        onChange={handleServiceChange}
+                        value={currentService}
+                      >
+                        <option value={0}>Select service</option>
+                        <option value={1}>Static Website</option>
+                        <option value={2}>Dynamic Website</option>
+                        <option value={3}>UI/UX</option>
+                        <option value={4}>Hosting</option>
+                        <option value={5}>Domain Registration</option>
+                        <option value={6}>Upgrade Your Website</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Contact Number *
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300"
+                        placeholder="Write your contact number"
+                        name="contact"
+                        value={formData.contact}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Location *
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300"
+                        placeholder="Write your location"
+                        name="location"
+                        value={formData.location}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  {/* Right Column */}
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Order Type *
+                      </label>
+                      <select
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300"
+                        onChange={handleOrderChange}
+                        value={currentOrder}
+                      >
+                        <option value="">Select order type</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Organization">Organization</option>
+                        <option value="Government">Government</option>
+                        <option value="Others">Others</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Additional Information
+                      </label>
+                      <textarea
+                        rows={8}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-300 resize-none"
+                        placeholder="Please tell us about the product you desire"
+                        name="additionalInfo"
+                        value={formData.additionalInfo}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="w-[80%] sm:w-[35%] h-[60%] sm:h-full flex flex-col gap-3 justify-end">
-                  <p className="font-serif">Order Type *</p>
-                  <select
-                    className="p-2 border border-slate-200 cursor-pointer rounded-md shadow-sm shadow-slate-300 mb-2 placeholder:text-[10px] sm:placeholder:text-[12px]"
-                    onChange={handleOrderChange}
-                    value={currentOrder}
-                  >
-                    <option value="">Select order type</option>
-                    <option value="Personal">Personal</option>
-                    <option value="Organization">Organization</option>
-                    <option value="Government">Government</option>
-                    <option value="Others">Others</option>
-                  </select>
-                  <p className="font-serif">Additional Information</p>
-                  <textarea
-                    rows={10}
-                    className="p-2 placeholder:p-4 border border-slate-200 rounded-md shadow-sm shadow-slate-300 mb-2 placeholder:text-[12px]"
-                    placeholder="Please tell something about the product you desire"
-                    name="additionalInfo"
-                    value={formData.additionalInfo}
-                    onChange={handleInputChange}
-                  />
-                  <p className="font-serif">* Mandatory fields</p>
+
+                <div className="text-center pt-6">
+                  <p className="text-sm text-gray-500 mb-4">* Mandatory fields</p>
                   <button
                     type="submit"
-                    className="h-[8%] sm:h-[15%] w-[70%] mx-auto  text-white text-[18px] bg-[#0766FF] rounded-full  font-serif"
+                    className="btn bg-black text-white hover:bg-gray-800 px-8 py-3 text-lg"
                   >
-                    Proceed
+                    Proceed with Order
                   </button>
                 </div>
-              </div>
-            </form>
+              </form>
+            </motion.div>
           </div>
-        )}
+        </div>
+      )}
 
-        <Services />
-        <Works />
-        <Footer />
-      </div>
+      <Services />
+      <Works />
+      <Footer />
     </>
   );
 };

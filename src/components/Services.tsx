@@ -10,44 +10,27 @@ const Services = () => {
     <div className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          variants={textVariant(0.2)}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
             Our <span className="bg-gradient-to-r from-black to-gray-600 bg-clip-text text-transparent">Services</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We offer comprehensive web development solutions to help your business thrive in the digital world.
           </p>
-        </motion.div>
+        </div>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {serviceItems?.map((item, index) => {
             return (
-              <motion.div
-                variants={
-                  index === 1 || index === 4
-                    ? fadeIn(index === 1 ? "down" : "up", "spring", 0.5, 1.5)
-                    : slideIn(
-                        index === 0 || index === 3
-                          ? "left"
-                          : index === 2 || index === 5
-                          ? "right"
-                          : "",
-                        "spring",
-                        0.5,
-                        1.5
-                      )
-                }
+              <div
                 className="card group cursor-pointer"
                 key={index}
                 onClick={() => navigate(`/afterservice/${index + 1}`)}
               >
                 {/* Service Icon */}
                 <div className="p-8 pb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-black to-gray-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-br from-black to-gray-600 rounded-2xl flex items-center justify-center mb-6">
                     <img
                       src={item?.img}
                       alt={item?.title}
@@ -56,7 +39,7 @@ const Services = () => {
                   </div>
                   
                   {/* Service Title */}
-                  <h3 className="text-xl font-bold text-black mb-4 group-hover:text-gray-600 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-black mb-4">
                     {item?.title}
                   </h3>
                   
@@ -66,25 +49,22 @@ const Services = () => {
                   </p>
                 </div>
 
-                {/* Hover Effect */}
+                {/* Learn More Link */}
                 <div className="px-8 pb-6">
-                  <div className="flex items-center text-black font-medium group-hover:translate-x-2 transition-transform duration-300">
+                  <div className="flex items-center text-black font-medium">
                     <span>Learn More</span>
                     <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
 
         {/* CTA Section */}
-        <motion.div
-          variants={fadeIn("up", "spring", 0.8, 1.5)}
-          className="text-center mt-16"
-        >
+        <div className="text-center mt-16">
           <div className="bg-gradient-to-r from-black to-gray-800 rounded-3xl p-12 text-white">
             <h3 className="text-3xl font-bold mb-4">
               Ready to Start Your Project?
@@ -107,7 +87,7 @@ const Services = () => {
               </button>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
